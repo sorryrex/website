@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PhilTech School Website</title>
+<style>
+  
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fff8f7;
+    color: #3a1a1a;
+  }
+
+  a {
+    color: #a8002c;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  header {
+    background-color: #a8002c;
+    color: #fff;
+    padding: 1.2rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+  }
+
+  .container {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    user-select: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .nav-links a {
+    font-weight: 700;
+    padding: 0.3rem 0.8rem;
+    font-size: 1.08rem;
+    transition: background-color 0.3s ease, color 0.3s ease, letter-spacing 0.2s;
+    border-radius: 4px;
+    text-shadow: 0 1px 6px #fff8f7, 0 0.5px 2px #00000022;
+    letter-spacing: 1.5px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .nav-links a:hover,
+  .nav-links a:focus {
+    background-color: #80001d;
+    color: #fff;
+    outline: none;
+    letter-spacing: 3px;
+    text-shadow: 0 2px 10px #fff, 0 1px 6px #a8002c44;
+  }
+
+  
+  .hero {
+    background: linear-gradient(rgba(168,0,44,0.85), rgba(77,0,29,0.82)), url('https://images.unsplash.com/photo-1531070730312-7b2e2d9e1719?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') no-repeat center/cover;
+    color: #fff;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 1rem;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+  }
+
+  .hero p {
+    font-size: 1.25rem;
+    max-width: 700px;
+    margin-bottom: 2rem;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  }
+
+  .btn-primary {
+    background-color: #a8002c;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 30px;
+    box-shadow: 0 3px 8px rgba(168,0,44,0.7);
+    transition: background-color 0.3s ease, box-shadow 0.4s ease;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+  }
+
+  .btn-primary:hover,
+  .btn-primary:focus {
+    background-color: #80001d;
+    box-shadow: 0 3px 12px rgba(128,0,29,0.9);
+    outline: none;
+  }
+
+  
+  section {
+    padding: 3rem 1rem 4rem;
+    background-color: #fff8f7;
+  }
+
+  section:nth-of-type(even) {
+    background-color: #fbe8ee;
+  }
+
+  h2.section-title {
+    text-align: center;
+    font-size: 2.3rem;
+    margin-bottom: 1rem;
+    color: #a8002c;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 16px #fff, 0 2px 8px #a8002c22;
+  }
+
+  p.section-subtitle {
+    max-width: 600px;
+    margin: 0 auto 3rem auto;
+    text-align: center;
+    font-size: 1.15rem;
+    color: #7a0021;
+    font-weight: 600;
+    text-shadow: 0 1px 6px #fff8f7, 0 0.5px 2px #00000022;
+  }
+
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background-color: #fff;
+    padding: 1.8rem 1.6rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(196,62,91,0.18);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover,
+  .card:focus-within {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 30px rgba(168,0,44,0.24);
+    outline: none;
+  }
+
+  .card h3 {
+    margin-top: 0;
+    color: #a8002c;
+    margin-bottom: 0.8rem;
+    font-size: 1.4rem;
+    user-select: none;
+    letter-spacing: 1.2px;
+    text-shadow: 0 1px 6px #fff8f7, 0 1px 4px #a8002c22;
+  }
+
+  
+  .admission-list {
+    max-width: 650px;
+    margin: 0 auto;
+    font-size: 1.15rem;
+    color: #7a0021;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+  }
+
+  .admission-list li {
+    margin-bottom: 0.9rem;
+    text-shadow: 0 1px 6px #fff, 0 0.5px 2px #a8002c22;
+  }
+
+  
+  form.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff0f5;
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(168,0,44,0.11);
+  }
+
+  form.contact-form label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    color: #a8002c;
+  }
+
+  form.contact-form input,
+  form.contact-form textarea,
+  form.contact-form select {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    margin-bottom: 1.2rem;
+    border: 1.5px solid #a8002c;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+
+  form.contact-form input:focus,
+  form.contact-form textarea:focus,
+  form.contact-form select:focus {
+    outline: none;
+    border-color: #80001d;
+  }
+
+  form.contact-form textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .btn-submit {
+    background-color: #a8002c;
+    color: #fff;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 30px;
+    box-shadow: 0 3px 8px rgba(168,0,44,0.7);
+    transition: background-color 0.3s ease, box-shadow 0.4s ease;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+  }
+
+  .btn-submit:hover,
+  .btn-submit:focus {
+    background-color: #80001d;
+    box-shadow: 0 3px 12px rgba(128,0,29,0.9);
+    outline: none;
+  }
+
+  
+  footer {
+    background-color: #7a0021;
+    color: #fff;
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  footer a {
+    color: #ffd6e0;
+    margin: 0 0.5rem;
+  }
+
+  footer a:hover {
+    color: #fff0f0;
+  }
+
+  
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin-bottom: 5px;
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      width: 100%;
+      flex-direction: column;
+      display: none;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .nav-links.show {
+      display: flex;
+    }
+
+    .menu-toggle {
+      display: flex;
+    }
+    .nav-links a {
+      font-size: 1.3rem;
+      text-align: left;
+      padding: 0.5rem 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav aria-label="Primary Navigation">
+      <div class="logo" tabindex="0" aria-label="School Logo">PhilTech</div>
+      <div class="menu-toggle" aria-label="Toggle navigation menu" role="button" tabindex="0">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="nav-links">
+        <a href="#home" tabindex="0"><span>HOME</span></a>
+        <a href="#about" tabindex="0"><span>ABOUT</span></a>
+        <a href="#admissions" tabindex="0"><span>ADMISSION</span></a>
+        <a href="#academics" tabindex="0"><span>ACADEMIC</span></a>
+        <a href="#apply" tabindex="0"><span>APPLY</span></a>
+        <a href="#contact" tabindex="0"><span>CONTACT</span></a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="home" role="region" aria-label="Introduction">
+    <h1>Welcome to PhilTech</h1>
+    <p>Where excellence meets innovation – empowering the next generation of tech leaders.</p>
+    <button class="btn-primary" onclick="window.location.href='#apply'">Apply for Student</button>
+  </section>
+
+  <section id="about" role="region" aria-label="About PhilTech">
+    <h2 class="section-title">About Us</h2>
+    <p class="section-subtitle">Founded on strong values and a passion for education, PhilTech provides a nurturing environment for students to thrive both academically and socially.</p>
+    <div class="grid" tabindex="0">
+      <article class="card" tabindex="0">
+        <h3>Our Mission</h3>
+        <p>
+          Philippine Technological Institute of Science, Arts and Trade, Inc. (PHILTECH) is dedicated to give quality education to the development of every Filipino. It aims to hone students who are values oriented and physically, academically, socially and spiritually committed to the achievement of life-long learning and service to the nation.
+        </p>
+      </article>
+      <article class="card" tabindex="0">
+        <h3>Our Vision</h3>
+        <p>
+          PHILTECH shall emerge as the only technical school in the Philippines that can provide academic excellence, appropriate technology and produce graduates who are globally competitive and shall serve as pillar in this changing world.
+        </p>
+      </article>
+      <article class="card" tabindex="0">
+        <h3>PhilTech Hymn</h3>
+        <p style="white-space: pre-line; font-size: 1.08rem;">
+PHILTECH our dear Alma Mater
+Our second home and nurturer
+Lead us to learn away from aberration
+Help us achieved our ambitions
+
+Let your walls filled with our happy hearts
+Dreamers and young minds view the light
+Of tomorrow’s vision
+Sight of green and bright future
+With the guidance of our God Creator
+
+(Repeat All)
+PHILTECH! (PHILTECH), PHILTECH! (PHILTECH)
+(CODA)
+We’ll thank you. Thank you forever.
+Dear PHILTECH (2x)
+Dear PHILTECH
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section id="admissions" role="region" aria-label="Admissions Information">
+    <h2 class="section-title">Admissions</h2>
+    <p class="section-subtitle">Join our vibrant school community. Here’s what you need to know:</p>
+    <ul class="admission-list" tabindex="0" aria-live="polite">
+      <li>Our application period runs from January to June each year.</li>
+      <li>Eligible students are evaluated based on academic records, recommendations, and entrance assessments.</li>
+      <li>Financial aid and scholarship opportunities are available to qualified applicants.</li>
+      <li>We encourage prospective families to attend our open house events and campus tours.</li>
+      <li>Apply online or contact the admissions office for detailed information.</li>
+    </ul>
+  </section>
+
+  <section id="academics" role="region" aria-label="Academic Programs">
+    <h2 class="section-title">Academics</h2>
+    <p class="section-subtitle">PhilTech offers specialized tracks for Senior High School and College to shape your future in technology and beyond.</p>
+    <div class="grid" tabindex="0">
+      <article class="card" tabindex="0">
+        <h3>Senior High School Strands</h3>
+        <ul>
+          <li><b>HUMMS</b>: Humanities and Social Sciences</li>
+          <li><b>ICT</b>: Information and Communications Technology</li>
+          <li><b>HE</b>: Home Economics</li>
+          <li><b>ABM</b>: Accountancy, Business, and Management</li>
+          <li><b>TVL</b>: Technical-Vocational-Livelihood</li>
+        </ul>
+      </article>
+      <article class="card" tabindex="0">
+        <h3>College Courses</h3>
+        <ul>
+          <li><b>BSCS</b> - Bachelor of Science in Computer Science</li>
+          <li><b>BTVTED</b> - Bachelor of Technical-Vocational Teacher Education</li>
+          <li><b>BSOA</b> - Bachelor of Science in Office Administration</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="apply" role="region" aria-label="Apply for Student">
+    <h2 class="section-title">Apply for Student</h2>
+    <form class="contact-form" aria-label="Student Application Form" id="student-application-form">
+      <label for="student-name">Full Name:</label>
+      <input id="student-name" name="student-name" type="text" placeholder="Your full name" required />
+
+      <label for="student-email">Email:</label>
+      <input id="student-email" name="student-email" type="email" placeholder="you@example.com" required />
+
+      <label for="student-grade">Grade Level:</label>
+      <select id="student-grade" name="student-grade" required>
+        <option value="" disabled selected>Select level</option>
+        <option value="senior-high">Senior High School</option>
+        <option value="college">College</option>
+      </select>
+
+      <div id="shs-strands" style="display:none;">
+        <label for="student-strand">Strand (Senior High):</label>
+        <select id="student-strand" name="student-strand">
+          <option value="" disabled selected>Select strand</option>
+          <option value="humms">HUMMS</option>
+          <option value="ict">ICT</option>
+          <option value="he">HE</option>
+          <option value="abm">ABM</option>
+          <option value="tvl">TVL</option>
+        </select>
+      </div>
+
+      <div id="college-courses" style="display:none;">
+        <label for="student-course">Course (College):</label>
+        <select id="student-course" name="student-course">
+          <option value="" disabled selected>Select course</option>
+          <option value="bscs">BSCS</option>
+          <option value="btvted">BTVTED</option>
+          <option value="bsoa">BSOA</option>
+        </select>
+      </div>
+
+      <label for="student-message">Message here.</label>
+      <textarea id="student-message" name="student-message" placeholder="Tell us more..." required></textarea>
+
+      <button type="submit" class="btn-submit">Submit Application</button>
+    </form>
+  </section>
+
+  <section id="contact" role="region" aria-label="Contact Us">
+    <h2 class="section-title">Contact Us</h2>
+    <form class="contact-form" aria-label="Contact form">
+      <label for="name">Name:</label>
+      <input id="name" name="name" type="text" placeholder="Your full name" required />
+
+      <label for="email">Email:</label>
+      <input id="email" name="email" type="email" placeholder="you@example.com" required />
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" placeholder="Your message here..." required></textarea>
+
+      <button type="submit" class="btn-submit">Send Message</button>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p>© 2025 PhilTech. All rights reserved.</p>
+    <p>
+      <a href="mailto:contact@ magpayoarwin31@gmail.com" aria-label="Email Us">contact@magpayoarwin31@gmail.com</a> | 
+      <a href="tel:+1 (234) 567-890" aria-label="Call Us">09516659600</a>
+    </p>
+    <p>
+      <a href="#" aria-label="Facebook">Facebook</a> | 
+      <a href="#" aria-label="Twitter">Twitter</a> | 
+      <a href="#" aria-label="Instagram">Instagram</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+
+  
+  menuToggle.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      navLinks.classList.toggle('show');
+    }
+  });
+
+  
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const targetID = link.getAttribute('href').substring(1);
+      const targetSection = document.getElementById(targetID);
+      if(targetSection) {
+        window.scrollTo({ top: targetSection.offsetTop - 70, behavior: 'smooth' });
+        navLinks.classList.remove('show'); 
+      }
+    });
+  });
+
+  
+  const gradeSelect = document.getElementById('student-grade');
+  const shsStrands = document.getElementById('shs-strands');
+  const collegeCourses = document.getElementById('college-courses');
+  gradeSelect.addEventListener('change', function() {
+    if (this.value === "senior-high") {
+      shsStrands.style.display = "block";
+      collegeCourses.style.display = "none";
+      document.getElementById('student-strand').setAttribute('required', 'required');
+      document.getElementById('student-course').removeAttribute('required');
+    } else if (this.value === "college") {
+      collegeCourses.style.display = "block";
+      shsStrands.style.display = "none";
+      document.getElementById('student-course').setAttribute('required', 'required');
+      document.getElementById('student-strand').removeAttribute('required');
+    } else {
+      shsStrands.style.display = "none";
+      collegeCourses.style.display = "none";
+      document.getElementById('student-strand').removeAttribute('required');
+      document.getElementById('student-course').removeAttribute('required');
+    }
+  });
+
+  
+  const contactForm = document.querySelector('section#contact .contact-form');
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Thank you for contacting PhilTech. We will get back to you soon!');
+    contactForm.reset();
+  });
+
+  
+  const applyForm = document.getElementById('student-application-form');
+  applyForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Thank you for applying to PhilTech. Our admissions team will contact you soon!');
+    applyForm.reset();
+    shsStrands.style.display = "none";
+    collegeCourses.style.display = "none";
+  });
+</script>
+
+</body>
+</html>
