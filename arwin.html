@@ -1,32 +1,308 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Arwin</title>
+    <title>Arwin - Applicant Management System</title>
     <style>
         body {
             background-color: #ffffff;
             color: #2c0000;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
         header {
             background-color: #660000;
             color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #8b0000;
+            padding: 10px;
+        }
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
         }
         section {
             background-color: #ffffff;
-            color: #2c0000; /* use dark red for text */
+            color: #2c0000;
+            padding: 20px;
+            margin: 10px;
+            border-left: 5px solid #660000;
         }
-        /* Additional styles can go here */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        table th {
+            background-color: #660000;
+            color: #ffffff;
+            padding: 12px;
+            text-align: left;
+        }
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        table tr:hover {
+            background-color: #f5f5f5;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .status-pending {
+            background-color: #ffc107;
+            color: #000;
+        }
+        .status-review {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+        .status-interview {
+            background-color: #28a745;
+            color: #fff;
+        }
+        .button {
+            background-color: #660000;
+            color: #ffffff;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .button:hover {
+            background-color: #8b0000;
+        }
+        .form-group {
+            margin: 15px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>Welcome to Arwin</h1>
+        <h1>🎯 Arwin - Applicant Management System</h1>
+        <p>Manage your job applicants efficiently</p>
     </header>
-    <section>
-        <p>This is a section with white background and dark red text.</p>
-    </section>
-    <section>
-        <p>This is another section.</p>
-    </section>
+    
+    <nav>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#applicants">Applicants</a>
+        <a href="#add-applicant">Add New</a>
+        <a href="#analytics">Analytics</a>
+    </nav>
+
+    <div class="container">
+        <!-- Dashboard Section -->
+        <section id="dashboard">
+            <h2>Dashboard</h2>
+            <p>Welcome to the Arwin Applicant Management System. Here you can view, manage, and organize all job applicants.</p>
+            <div style="display: flex; gap: 20px;">
+                <div style="flex: 1; background-color: #f0f0f0; padding: 15px; border-radius: 5px;">
+                    <h3>Total Applicants</h3>
+                    <p style="font-size: 24px; color: #660000;"><strong id="total-count">3</strong></p>
+                </div>
+                <div style="flex: 1; background-color: #f0f0f0; padding: 15px; border-radius: 5px;">
+                    <h3>Under Review</h3>
+                    <p style="font-size: 24px; color: #17a2b8;"><strong id="review-count">1</strong></p>
+                </div>
+                <div style="flex: 1; background-color: #f0f0f0; padding: 15px; border-radius: 5px;">
+                    <h3>Interviews Scheduled</h3>
+                    <p style="font-size: 24px; color: #28a745;"><strong id="interview-count">1</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Applicants List Section -->
+        <section id="applicants">
+            <h2>Applicants List</h2>
+            <table id="applicants-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Position</th>
+                        <th>Application Date</th>
+                        <th>Status</th>
+                        <th>Experience</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="applicants-body">
+                    <!-- Data will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Add New Applicant Section -->
+        <section id="add-applicant">
+            <h2>Add New Applicant</h2>
+            <form id="applicant-form">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="position">Position Applied For *</label>
+                        <input type="text" id="position" name="position" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience">Experience</label>
+                        <input type="text" id="experience" name="experience" placeholder="e.g., 5 years">
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status *</label>
+                        <select id="status" name="status" required>
+                            <option value="">Select Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Under Review">Under Review</option>
+                            <option value="Interview Scheduled">Interview Scheduled</option>
+                            <option value="Rejected">Rejected</option>
+                            <option value="Hired">Hired</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="button">Add Applicant</button>
+            </form>
+        </section>
+
+        <!-- Analytics Section -->
+        <section id="analytics">
+            <h2>Analytics</h2>
+            <p>Applicant status distribution and insights</p>
+            <div id="analytics-content">
+                <p id="pending-stat">Pending: <strong>0</strong></p>
+                <p id="review-stat">Under Review: <strong>0</strong></p>
+                <p id="interview-stat">Interview Scheduled: <strong>0</strong></p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Sample applicants data
+        let applicants = [
+            {id: 1, name: "John Doe", email: "john@example.com", phone: "+1-555-0101", position: "Software Engineer", applicationDate: "2026-03-01", status: "Under Review", experience: "5 years"},
+            {id: 2, name: "Jane Smith", email: "jane@example.com", phone: "+1-555-0102", position: "Product Manager", applicationDate: "2026-03-02", status: "Interview Scheduled", experience: "7 years"},
+            {id: 3, name: "Mike Johnson", email: "mike@example.com", phone: "+1-555-0103", position: "Data Analyst", applicationDate: "2026-03-03", status: "Pending", experience: "3 years"}
+        ];
+
+        // Function to render applicants table
+        function renderApplicants() {
+            const tbody = document.getElementById('applicants-body');
+            tbody.innerHTML = '';
+            applicants.forEach(applicant => {
+                const statusClass = `status-${applicant.status.toLowerCase().replace(/\s+/g, '-')}`;
+                const row = `
+                    <tr>
+                        <td>${applicant.id}</td>
+                        <td>${applicant.name}</td>
+                        <td>${applicant.email}</td>
+                        <td>${applicant.phone}</td>
+                        <td>${applicant.position}</td>
+                        <td>${applicant.applicationDate}</td>
+                        <td><span class="status-badge ${statusClass}">${applicant.status}</span></td>
+                        <td>${applicant.experience}</td>
+                        <td>
+                            <button class="button" onclick="editApplicant(${applicant.id})">Edit</button>
+                            <button class="button" style="background-color: #dc3545;" onclick="deleteApplicant(${applicant.id})">Delete</button>
+                        </td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+            updateStats();
+        }
+
+        // Function to update statistics
+        function updateStats() {
+            const total = applicants.length;
+            const pending = applicants.filter(a => a.status === 'Pending').length;
+            const review = applicants.filter(a => a.status === 'Under Review').length;
+            const interview = applicants.filter(a => a.status === 'Interview Scheduled').length;
+
+            document.getElementById('total-count').textContent = total;
+            document.getElementById('review-count').textContent = review;
+            document.getElementById('interview-count').textContent = interview;
+
+            document.getElementById('pending-stat').innerHTML = `Pending: <strong>${pending}</strong>`;
+            document.getElementById('review-stat').innerHTML = `Under Review: <strong>${review}</strong>`;
+            document.getElementById('interview-stat').innerHTML = `Interview Scheduled: <strong>${interview}</strong>`;
+        }
+
+        // Function to add new applicant
+        document.getElementById('applicant-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const newApplicant = {
+                id: Math.max(...applicants.map(a => a.id), 0) + 1,
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                position: document.getElementById('position').value,
+                applicationDate: new Date().toISOString().split('T')[0],
+                status: document.getElementById('status').value,
+                experience: document.getElementById('experience').value
+            };
+            applicants.push(newApplicant);
+            renderApplicants();
+            this.reset();
+            alert('Applicant added successfully!');
+        });
+
+        // Function to delete applicant
+        function deleteApplicant(id) {
+            if(confirm('Are you sure you want to delete this applicant?')) {
+                applicants = applicants.filter(a => a.id !== id);
+                renderApplicants();
+                alert('Applicant deleted!');
+            }
+        }
+
+        // Function to edit applicant
+        function editApplicant(id) {
+            alert('Edit functionality can be extended. Applicant ID: ' + id);
+        }
+
+        // Initial render
+        renderApplicants();
+    </script>
 </body>
 </html>
